@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>FitnessHub</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/aos.css">
+
+    <!--CHATGP-->
+    <!-- Agrega los estilos del modal de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <!-- Agrega la biblioteca de Bootstrap y Popper.js (necesario para los modales de Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/tooplate-gymso-style.css">
+    <!--
+Tooplate 2119 Gymso Fitness
+https://www.tooplate.com/view/2119-gymso-fitness
+-->
+</head>
+
+<body data-spy="scroll" data-target="#navbarNav" data-offset="50">
+
+    <!-- MENU BAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+
+            <a class="navbar-brand" href="#home">FitnessHub</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-lg-auto">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link smoothScroll">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#entrenamientos" class="nav-link smoothScroll">Trainings</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#class" class="nav-link smoothScroll">Exercises</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link smoothScroll">Contact</a>
+                    </li>
+                </ul>
+
+                <ul class="social-icon ml-lg-3">
+                    <li><a href="https://fb.com/tooplate" class="fa fa-facebook"></a></li>
+                    <li><a href="#" class="fa fa-twitter"></a></li>
+                    <li><a href="#" class="fa fa-instagram"></a></li>
+                </ul>
+                <ul class="navbar-nav ml-lg-auto">
+                    <!--<img src="images/team/team-image.jpg" class="img-fluid" alt="Trainer">-->
+                    <li><img src="images/logout2.png" style="cursor: pointer;" id="logout"></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero d-flex flex-column justify-content-center align-items-center" id="home">
+
+        <div class="bg-overlay"></div>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-md-10 mx-auto col-12">
+                    <div class="hero-text mt-5 text-center">
+
+                        <h1 class="text-white" data-aos="fade-up" data-aos-delay="500">Buenos dias usuario</h1>
+
+                     
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="feature align-items-center justify-content-center" id="entrenamientos">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto col-12">
+                    <div class="hero-text mt-5 text-center">
+                        <h6 data-aos="fade-up">Estos son los entrenamientos disponibles</h6>
+
+                        <div id="entrenamientos-container" class="row" data-aos="fade-up"></div>
+
+                    </div>
+                </div>
+
+                <div class="modal fade" id="trainingModal" tabindex="-1" role="dialog"
+                    aria-labelledby="trainingModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="trainingModalLabel">Training Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="trainingModalBody">
+                                <!-- Detalles del ejercicio se agregarán aquí dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- CLASS -->
+    <section class="class section" id="class">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12 col-12 text-center mb-5">
+                    <!--<h6 data-aos="fade-up">Get A Perfect Body</h6>-->
+
+                    <h2 data-aos="fade-up" data-aos-delay="200">Exercises</h2>
+                    <h6 data-aos="fade-up">Search for your favorite exercises by body parts</h6>
+                    <!--<input data-aos="fade-up" type="text111" id="exerciseSearchInput" name="exerciseSearchInput">-->
+                    <select data-aos="fade-up" id="exerciseSearchInput" name="exerciseSearchInput">
+                        <option value="back">Back</option>
+                        <option value="cardio">Cardio</option>
+                        <option value="chest">Chest</option>
+                        <option value="lower arms">Lower arms</option>
+                        <option value="lower legs">Lower legs</option>
+                        <option value="neck">Neck</option>
+                        <option value="shoulders">Shoulders</option>
+                        <option value="upper arms">Upper arms</option>
+                        <option value="upper legs">Upper legs</option>
+                        <option value="waist">Waist</option>
+                    </select>
+                    <button data-aos="fade-up" class="btn btn-primary mx-auto" id="searchButton"
+                        type="button">Buscar</button>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 col-12 mx-auto" data-aos="fade-up" data-aos-delay="400" id="exercisesDiv">
+
+                </div>
+
+                <!-- EXERCISE DETAIL -->
+                <section class="about section" id="about" style="display: none;">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="mt-lg-5 mb-lg-0 mb-4 col-lg-5 col-md-10 mx-auto col-12">
+                                <h2 class="mb-4" data-aos="fade-up" data-aos-delay="300" id="exerciseName">Hello, we are
+                                    Gymso</h2>
+
+                                <p data-aos="fade-up" data-aos-delay="400" id="type"> <a rel="nofollow"
+                                        target="_parent">Type</a></p>
+                                <p data-aos="fade-up" data-aos-delay="400" id="muscle"><a rel="nofollow"
+                                        target="_parent">Muscle</a></p>
+                                <p data-aos="fade-up" data-aos-delay="400" id="equipment"><a rel="nofollow"
+                                        target="_parent">Equipment</a></p>
+                                <p data-aos="fade-up" data-aos-delay="400" id="instructions"><a rel="nofollow"
+                                        target="_parent">Instructions</a></p>
+
+
+                            </div>
+
+                            <div class="mt-lg-5 mb-lg-0 mb-4 col-lg-5 col-md-10 mx-auto col-12" id="gifContainer">
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Modal para mostrar información detallada del ejercicio -->
+                <div class="modal fade" id="exerciseModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exerciseModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exerciseModalLabel">Exercise Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="exerciseModalBody">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- CONTACT -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="row">
+
+                <div class="ml-auto col-lg-5 col-md-6 col-12">
+                    <h2 class="mb-4 pb-2" data-aos="fade-up" data-aos-delay="200">Feel free to ask anything</h2>
+
+                    <form action="#" method="post" class="contact-form webform" data-aos="fade-up" data-aos-delay="400"
+                        role="form">
+                        <input type="text" class="form-control" name="cf-name" placeholder="Name">
+
+                        <input type="email" class="form-control" name="cf-email" placeholder="Email">
+
+                        <textarea class="form-control" rows="5" name="cf-message" placeholder="Message"></textarea>
+
+                        <button type="submit" class="form-control" id="submit-button" name="submit">Send
+                            Message</button>
+                    </form>
+                </div>
+
+                <div class="mx-auto mt-4 mt-lg-0 mt-md-0 col-lg-5 col-md-6 col-12">
+                    <h2 class="mb-4" data-aos="fade-up" data-aos-delay="600">Where you can <span>find us</span></h2>
+
+                    <p data-aos="fade-up" data-aos-delay="800"><i class="fa fa-map-marker mr-1"></i> 120-240 Rio de
+                        Janeiro - State of Rio de Janeiro, Brazil</p>
+                    <!-- How to change your own map point
+	1. Go to Google Maps
+	2. Click on your location point
+	3. Click "Share" and choose "Embed map" tab
+	4. Copy only URL and paste it within the src="" field below
+-->
+                    <div class="google-map" data-aos="fade-up" data-aos-delay="900">
+                        <iframe
+                            src="https://maps.google.com/maps?q=Av.+Lúcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                            width="1920" height="250" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+
+
+                <div class="d-flex justify-content-center mx-auto col-lg-5 col-md-7 col-12">
+                    <p class="mr-4">
+                        <i class="fa fa-envelope-o mr-1"></i>
+                        <a href="#">fitnesshub@company.co</a>
+                    </p>
+
+                    <p><i class="fa fa-phone mr-1"></i> 010-020-0840</p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal fade" id="membershipForm" tabindex="-1" role="dialog" aria-labelledby="membershipFormLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h2 class="modal-title" id="membershipFormLabel">Membership Form</h2>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form class="membership-form webform" role="form">
+                        <input type="text" class="form-control" name="cf-name" placeholder="John Doe">
+
+                        <input type="email" class="form-control" name="cf-email" placeholder="Johndoe@gmail.com">
+
+                        <input type="tel" class="form-control" name="cf-phone" placeholder="123-456-7890"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+
+                        <textarea class="form-control" rows="3" name="cf-message"
+                            placeholder="Additional Message"></textarea>
+
+                        <button type="submit" class="form-control" id="submit-button" name="submit">Submit
+                            Button</button>
+
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="signup-agree">
+                            <label class="custom-control-label text-small text-muted" for="signup-agree">I agree to the
+                                <a href="#">Terms &amp;Conditions</a>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/smoothscroll.js"></script>
+    <script src="js/custom.js"></script>
+
+    <script>
+        // Obtener el JSON almacenado en localStorage
+        const storedData = JSON.parse(localStorage.getItem('user'));
+        console.log('storedData');
+        console.log(storedData);
+
+        // Este código asume que has guardado el nombre de usuario en una variable llamada 'loggedInUser'
+        const updateUserGreeting = () => {
+            const greetingElement = document.querySelector('.hero-text h1.text-white[data-aos="fade-up"][data-aos-delay="500"]');
+            if (greetingElement) {
+                greetingElement.textContent = `Buenos días ${storedData.username}`;
+                //greetingElement.textContent = `Buenos días Manolo`;
+            }
+        };
+
+        updateUserGreeting()
+    </script>
+   
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchButton = document.getElementById('searchButton');
+
+            searchButton.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                const exerciseSearchInput = document.getElementById('exerciseSearchInput').value;
+
+                if (exerciseSearchInput === '') {
+                    // Manejar caso de búsqueda vacía
+                    return;
+                }
+
+                const url = `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${exerciseSearchInput}`;
+                const headers = {
+                    'X-RapidAPI-Key': '94413f86ffmshdb45fac8326cbc3p199823jsnd3f2ee75bef8',
+                    'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
+                };
+
+                fetch(url, { headers })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Manejar la respuesta con los ejercicios encontrados
+                        console.log('Ejercicios encontrados:', data);
+
+                        // Obtener el div donde se mostrarán los ejercicios
+                        const exercisesDiv = document.getElementById('exercisesDiv');
+
+                        // Limpiar contenido anterior
+                        exercisesDiv.innerHTML = '';
+
+                        // Crear una lista con estilo y agregar ejercicios
+                        exercisesList = document.createElement('ul');
+                        exercisesList.className = 'list-group';
+
+
+
+                        data.forEach(exercise => {
+                            const exerciseItem = document.createElement('li');
+                            exerciseItem.className = 'list-group-item';
+                            exerciseItem.innerHTML = `
+                                <strong>${exercise.name}</strong>
+                            `;
+
+                            // Agregar eventos de clic y hover
+                            exerciseItem.addEventListener('click', function () {
+                                // Después de obtener los datos
+                                const aboutSection = document.getElementById('about');
+                                aboutSection.style.display = 'block';
+                                // Mostrar el modal con detalles del ejercicio
+                                showExerciseDetails(exercise);
+                            });
+
+                            exerciseItem.addEventListener('mouseenter', function () {
+                                exerciseItem.style.backgroundColor = '#f0f0f0';
+                            });
+
+                            exerciseItem.addEventListener('mouseleave', function () {
+                                exerciseItem.style.backgroundColor = '';
+                            });
+
+                            exercisesList.appendChild(exerciseItem);
+                        });
+
+                        // Agregar la lista con estilo al div de ejercicios
+                        exercisesDiv.appendChild(exercisesList);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Manejar error de búsqueda
+                    });
+            });
+
+            // Función para mostrar el modal con detalles del ejercicio
+            function showExerciseModal(exercise) {
+                const exerciseModalLabel = document.getElementById('exerciseModalLabel');
+                const exerciseModalBody = document.getElementById('exerciseModalBody');
+
+                // Configurar título y contenido del modal
+                exerciseModalLabel.innerText = exercise.name;
+                exerciseModalBody.innerHTML = `
+                <div class="exercise-details">
+                        <p><strong>Type:</strong> ${exercise.target}</p>
+                        <p><strong>Muscle:</strong> ${exercise.bodyPart}</p>
+                        <p><strong>Equipment:</strong> ${exercise.equipment}</p>
+                        
+                    </div>
+                    <div class="exercise-instructions">
+                        <p><strong>Instructions:</strong></p>
+                        <p>${exercise.instructions}</p>
+                    </div>
+                    <div class="exercise-gif">
+                        <img src="${exercise.gifUrl}" alt="${exercise.name} GIF">
+                    </div>
+                        `;
+
+                // Mostrar el modal
+                $('#exerciseModal').modal('show');
+            }
+
+            function showExerciseDetails(exercise) {
+                const exerciseName = document.getElementById('exerciseName');
+                const type = document.getElementById('type');
+                const muscle = document.getElementById('muscle');
+                const equipment = document.getElementById('equipment');
+                const instructions = document.getElementById('instructions');
+                const gifContainer = document.getElementById('gifContainer');
+
+                // Configurar contenido de la sección de detalles
+                exerciseName.innerText = exercise.name.toUpperCase();
+                type.innerHTML = `<strong>Type:</strong> ${exercise.target}`;
+                muscle.innerHTML = `<strong>Muscle:</strong> ${exercise.bodyPart}`;
+                equipment.innerHTML = `<strong>Equipment:</strong> ${exercise.equipment}`;
+                instructions.innerHTML = `<strong>Instructions:</strong> ${exercise.instructions}`;
+
+                // Configurar el contenido del div del GIF
+                gifContainer.innerHTML = `
+                    <div class="exercise-gif">
+                     <img src="${exercise.gifUrl}" alt="${exercise.name} GIF">
+                    </div>
+                `;
+            }
+        });
+    </script>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            //imagen del tick
+            const img = document.createElement('img');
+            img.src = 'images/tick_fitness1.png';
+
+            const trainingsDiv = document.getElementById('entrenamientos-container');
+
+            // Función para crear un enlace de entrenamiento
+            function createTrainingLink(training, completed) {
+                const trainingLink = document.createElement('a');
+                trainingLink.href = "#";  // Puedes establecer el enlace a donde quieras
+                trainingLink.className = 'btn custom-btn bordered mt-3 col-12';
+                trainingLink.innerText = training.name;
+
+                // Verificar si el entrenamiento está completado antes de añadir la imagen
+                checkIfTrainingCompleted(training.training_id, function (completed) {
+                    if (completed) {
+                        const img = document.createElement('img');
+                        img.src = 'images/tick_fitness1.png';
+                        trainingLink.appendChild(img);
+                    }
+                });
+
+
+                // Agrega el atributo disabled al enlace
+
+                // Agrega el atributo disabled al enlace si está completado
+                /*if (checkIfTrainingCompleted(data.success) === true) {
+                    // trainingLink.setAttribute('disabled', 'true');
+                    trainingLink.appendChild(img);
+                }*/
+                //trainingLink.appendChild(img);
+
+                trainingLink.addEventListener('click', function () {
+                    // Mostrar el modal con detalles del entrenamiento
+                    showTrainingModal(training);
+                });
+
+                return trainingLink;
+            }
+
+            // Solicitar y visualizar los entrenamientos al cargar la página
+            let PREFIX_URL = window.location.protocol + "//" + window.location.host;
+            console.log(PREFIX_URL);
+            console.log(PREFIX_URL + '/trainings/');
+            fetch(PREFIX_URL + '/trainings/', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Limpiar contenido anterior
+                    trainingsDiv.innerHTML = '';
+
+                    // Crear enlaces de entrenamiento y agregar al contenedor
+                    data.forEach(training => {
+                        const trainingLink = createTrainingLink(training);
+                        trainingsDiv.appendChild(trainingLink);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Manejar error al cargar los entrenamientos
+                });
+
+            // Función para mostrar el modal con detalles del entrenamiento
+            function showTrainingModal(training) {
+                const trainingModalLabel = document.getElementById('trainingModalLabel');
+                const trainingModalBody = document.getElementById('trainingModalBody');
+
+                // Configurar título y contenido del modal
+                trainingModalLabel.innerText = training.name;
+                trainingModalBody.innerHTML = `
+                <div class="training-details">
+                    <p><strong>Duration:</strong> ${training.duration} minutes</p>
+                    <p><strong>Exercises:</strong> ${training.exercises} </p>
+                </div>
+                <button id="completeTrainingBtn" class="btn btn-success">Completar</button>
+               
+            `;
+
+                // Mostrar el modal
+                $('#trainingModal').modal('show');
+
+                checkIfTrainingCompleted(training.training_id, function (completed) {
+                    const completeTrainingBtn = document.getElementById('completeTrainingBtn');
+                    const undoText = document.createElement('span');
+                    undoText.innerText = 'Deshacer';
+                    undoText.style.color = 'red';
+                    undoText.style.marginLeft = '10px'; // Ajusta el margen según sea necesario
+                    undoText.style.cursor = 'pointer';
+                    undoText.style.textDecoration = 'underline';
+                    undoText.style.border = 'none';
+                    undoText.style.backgroundColor = 'transparent';
+                    undoText.style.outline = 'none';
+
+
+                    if (completed) {
+                        // Si el entrenamiento está completado, deshabilitar el botón, cambiar el color y el texto
+                        completeTrainingBtn.disabled = true;
+                        completeTrainingBtn.style.backgroundColor = 'gray';
+                        completeTrainingBtn.innerText = 'Completado';
+                        completeTrainingBtn.parentNode.appendChild(undoText);
+                    } else {
+                        // Si el entrenamiento no está completado, habilitar el botón y mantener el color original y el texto original
+                        completeTrainingBtn.disabled = false;
+                        completeTrainingBtn.style.backgroundColor = '';  // Puedes mantener el color original o cambiarlo según sea necesario
+                        completeTrainingBtn.innerText = 'Completar';
+                        if (completeTrainingBtn.parentNode.lastChild === undoText) {
+                            completeTrainingBtn.parentNode.removeChild(undoText);
+                        }
+                    }
+
+                    // Attach click event listener after the modal is shown
+                    completeTrainingBtn.addEventListener('click', function () {
+                        markTrainingCompleted(training.training_id);
+
+                    });
+
+                    // Attach click event listener for undo
+                    undoText.addEventListener('click', function () {
+                        deleteCompletedTraining(training.training_id);
+                        location.reload();
+                    });
+                });
+
+                // Attach click event listener after the modal is shown
+                //document.getElementById('completeTrainingBtn').addEventListener('click', function () {
+                //   markTrainingCompleted(training.training_id);
+                //});
+            }
+
+
+            // Función para verificar si el entrenamiento está completado
+            function checkIfTrainingCompleted(trainingId, callback) {
+                const storedData = JSON.parse(localStorage.getItem('user'));
+
+                // Enviar una solicitud al servidor para verificar si el entrenamiento está completado
+                let PREFIX_URL = window.location.protocol + "//" + window.location.host;
+                fetch(`${PREFIX_URL}/trainings/checkCompleted`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        training_id: trainingId,
+                        user_id: storedData.user_id
+                    })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        console.log("response.json()");
+                        return response.json();
+
+                    })
+                    .then(data => {
+                        console.log(data.success)
+                        // Llamar al callback con el resultado true si data.success es true
+                        callback(data.success === true);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Manejar error al verificar si el entrenamiento está completado
+                    });
+            }
+
+
+            // Función para eliminar un entrenamiento completado
+            function deleteCompletedTraining(trainingId) {
+                const storedData = JSON.parse(localStorage.getItem('user'));
+
+                // Enviar una solicitud al servidor para eliminar el entrenamiento completado
+                let PREFIX_URL = window.location.protocol + "//" + window.location.host;
+                fetch(`${PREFIX_URL}/trainings/deleteCompletedTraining`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        training_id: trainingId,
+                        user_id: storedData.user_id
+                    })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        // Puedes realizar acciones adicionales después de eliminar el entrenamiento completado
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Manejar error al eliminar el entrenamiento completado
+                    });
+            }
+
+
+
+            // Función para marcar un entrenamiento como completado
+            function markTrainingCompleted(trainingId) {
+                const storedData = JSON.parse(localStorage.getItem('user'));
+
+
+                // Enviar una solicitud al servidor para registrar el entrenamiento completado
+                let PREFIX_URL = window.location.protocol + "//" + window.location.host;
+                fetch(`${PREFIX_URL}/trainings/completed`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        //'Authorization': 'Bearer ' + getAuthToken()  // Assuming you have a function to get the auth token
+                    },
+                    body: JSON.stringify({
+                        training_id: trainingId,
+                        user_id: storedData.user_id
+                    })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        location.reload();
+
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Manejar error al marcar el entrenamiento como completado
+                    });
+            }
+        });
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const logoutImage = document.getElementById('logout');
+
+        // Agrega un event listener para el clic en la imagen de logout
+        logoutImage.addEventListener('click', function () {
+            // Muestra un modal de Bootstrap para confirmar el logout
+            $('#confirmLogoutModal').modal('show');
+        });
+
+        // Agrega un event listener para el botón de confirmar en el modal
+        document.getElementById('confirmLogoutBtn').addEventListener('click', async function () {
+            // Obtiene el usuario del localStorage
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            // Realiza una solicitud POST al endpoint /auth/logout del servidor FastAPI
+            const response = await fetch('/auth/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user),
+            });
+
+            try {
+                const responseData = await response.json();
+
+                if (response.ok) {
+                    // Si la respuesta es exitosa, redirige a index2.html
+                    localStorage.removeItem('user');
+                    window.location.href = 'index2.html';
+                } else {
+                    // Si la respuesta no es exitosa, muestra un mensaje de error
+                    console.error(responseData.detail || 'Error during logout');
+                }
+            } catch (error) {
+                console.error('Error parsing JSON response:', error);
+            } finally {
+                // Cierra el modal después de la operación, haya tenido éxito o no
+                $('#confirmLogoutModal').modal('hide');
+            }
+        });
+    });
+</script>
+
+
+    <!-- Agrega el modal de Bootstrap al final de tu HTML -->
+    <div class="modal fade" id="confirmLogoutModal" tabindex="-1" role="dialog"
+        aria-labelledby="confirmLogoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmLogoutModalLabel">Confirmar Logout</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas cerrar sesión?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirmLogoutBtn">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

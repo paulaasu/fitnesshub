@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  trainings-microservice:
+    build: ./trainings-microservice
+    ports:
+      - "8001:8000"
+    environment:
+      - DATABASE_URL=mysql://mysql-db:3306/fitnesshubdb
+    networks:
+      - app-network
+
+  users-microservice:
+    build: ./users-microservice
+    ports:
+      - "8002:3000"
+    environment:
+      - DATABASE_URL=mysql://mysql-db:3306/fitnesshubdb
+      - MONGODB_URL=mongodb://localhost:27017/fitnesshubdb
+    networks:
+      - app-network
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8000"
+    environment:
+      - MIC_USERS_URL=http://users-microservice:3000/api/user
+      - TRAININGS_SERVICE_URL=http://trainings-microservice:8000
+    networks:
+      - app-network
+
+  mysql-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: deusto
+      MYSQL_DATABASE: fitnesshubdb
+    networks:
+      - app-network
+
+  mongo-db:
+    image: mongo
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

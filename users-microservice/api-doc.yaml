@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  title: User Authentication and Training API
+  version: 1.0.0
+paths:
+  /api/user/register:
+    post:
+      summary: Register a new user
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                email:
+                  type: string
+      responses:
+        '201':
+          description: User registered successfully
+
+  /api/user/login:
+    post:
+      summary: Login a user
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '400':
+          description: Invalid credentials
+
+  /api/user/completedtrainings:
+    post:
+      summary: Mark a training as completed for a user
+      operationId: markCompletedTraining
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                training_id:
+                  type: integer
+      responses:
+        '200':
+          description: Training marked as completed
+        '404':
+          description: User or training not found
+        '500':
+          description: Error marking training as completed
+
+  /api/user/checkCompletedTrainings:
+    post:
+      summary: Check if a training is completed for a user
+      operationId: checkCompletedTrainings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                training_id:
+                  type: integer
+      responses:
+        '200':
+          description: Training completion status retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  completed:
+                    type: boolean
+        '404':
+          description: User or training not found
+        '500':
+          description: Error checking training completion status
+
+  /api/user/deleteCompletedTraining:
+    delete:
+      summary: Delete a completed training for a user
+      operationId: deleteCompletedTraining
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                training_id:
+                  type: integer
+      responses:
+        '200':
+          description: Completed training deleted successfully
+        '404':
+          description: User or training not found
+        '500':
+          description: Error deleting completed training

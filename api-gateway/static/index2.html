@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+   <!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">--> 
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <div class="login">
+        <section class="hero d-flex flex-column justify-content-center align-items-center" id="home">
+        <div class="login-screen">
+            
+            <div class="app-title">
+                <h1>FitnessHub</h1>
+            </div>
+
+            <!--<div class="login-form">-->
+            <div class="loginform">
+                <form id="login-form">
+                    <div class="control-group">
+                        <input type="text" class="login-field" value="" placeholder="username" id="login-name">
+                        <label class="login-field-icon fui-user" for="login-name"></label>
+                    </div>
+
+                    <div class="control-group">
+                        <input type="password" class="login-field" value="" placeholder="password" id="login-pass">
+                        <label class="login-field-icon fui-lock" for="login-pass"></label>
+                    </div>
+
+                <!--<a class="btn btn-primary btn-large btn-block" href="#">Login</a> -->
+                    <button class="btn btn-primary btn-large btn-block" type="submit">Login</button>
+                <!--<button class="btn btn-primary btn-large btn-block" id="login-button">Login</button>-->
+                    <a class="login-link" >¿No tienes cuenta? </a>
+                    <a class="login-link" href="#" id="register-link">Registrar</a>
+                </form>
+                <p id="error-message" style="display: none; color: red;">Por favor, complete todos los campos.</p>
+                <p id="success-message" style="display: none; color: green;"></p>
+            </div>
+
+            <!-- Formulario de Registro (oculto inicialmente) -->
+            <div class="register-form" style="display: none;">
+                <form id="register-form">
+                    <div class="control-group">
+                        <input type="text" class="login-field" name="username" placeholder="Nombre de usuario" required>
+                        <label class="login-field-icon fui-user" for="register-name"></label>
+                    </div>
+
+                    <div class="control-group">
+                        <input type="email" class="login-field" name="email" placeholder="Correo electrónico" required>
+                        <label class="login-field-icon fui-mail" for="register-email"></label>
+                    </div>
+
+                    <div class="control-group">
+                        <input type="password" class="login-field" name="password" placeholder="Contraseña" required>
+                        <label class="login-field-icon fui-lock" for="register-pass"></label>
+                    </div>
+
+                    <button class="btn btn-primary btn-large btn-block" type="submit">Registrarse</button>
+                    <a class="login-link" href="#" id="register-back">Volver al Login</a>
+                </form>
+                <p id="error-message2" style="display: none; color: red;">Por favor, complete todos los campos.</p>
+                <p id="success-message2" style="display: none; color: green;"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('register-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.querySelector('.loginform').style.display = 'none';
+            document.querySelector('.register-form').style.display = 'block';
+        });
+
+        document.getElementById('register-back').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.querySelector('.register-form').style.display = 'none';
+            document.querySelector('.loginform').style.display = 'block';
+        });
+
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.querySelector('input[name="username"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+            console.log(username)
+            console.log(email)
+            console.log(password)
+
+
+            if (username === '' || email === '' || password === '') {
+                document.getElementById('error-message2').style.display = 'block';
+                document.getElementById('success-message2').style.display = 'none';
+            } else {
+                document.getElementById('error-message2').style.display = 'none';
+
+                let PREFIX_URL = window.location.protocol + "//" + window.location.host;
+                console.log(PREFIX_URL+'/auth/register');
+                fetch(PREFIX_URL+'/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password, email })
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('success-message2').style.display = 'block';
+                    document.getElementById('success-message2').innerText = "Usuario registrado correctamente";
+                    event.preventDefault();
+                    document.querySelector('.register-form').style.display = 'none';
+                    document.querySelector('.loginform').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('error-message2').style.display = 'block';
+                    document.getElementById('error-message2').innerText = 'Error durante el registro';
+                    document.getElementById('success-message2').style.display = 'none';
+                });
+            }
+        });
+
+        
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('login-name').value;
+            const password = document.getElementById('login-pass').value;
+
+            if (username === '' ||  password === '') {
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('success-message').style.display = 'none';
+            } else {
+                document.getElementById('error-message').style.display = 'none';
+
+
+                let PREFIX_URL = window.location.protocol + "//" + window.location.host;
+                console.log(PREFIX_URL)
+                console.log(PREFIX_URL+'/auth/login')
+                fetch(PREFIX_URL+'/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                })
+                //.then(response => response.text())
+                .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+
+                })
+
+                .then(data => {
+                    document.getElementById('success-message').style.display = 'block';
+                    document.getElementById('success-message').innerText = data;
+                    const token = data.token;
+                    const user = data.user;
+
+                    // Guardar el token y la información del usuario en el localStorage
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('user', JSON.stringify(user));
+                    console.log(localStorage)
+        
+                    window.location.href = '/static/indexFitness.html';
+                })
+
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('error-message').style.display = 'block';
+                    document.getElementById('error-message').innerText = 'Usuario o contraseña incorrecto';
+                    document.getElementById('success-message').style.display = 'none';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
